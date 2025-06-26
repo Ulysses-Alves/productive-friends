@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="static/css/default-style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore-compat.js"></script>
+
+
+</head>
+<body class="">
+    <div id="head">
+        <h1 id="logged-user" class="test-border">getUserName</h1>
+        <div class="test-border">
+            <div id="week-selector">
+                <div>
+                    <h2 id="selected-week">Week X</h2>
+                    <button id="week-selector-btn" class="">Select Week</button>
+                </div>
+            </div>
+            <div id="day-selector">
+
+            </div>
+        </div>
+        <div class="test-border">
+            <button class="btn p-1">logout</button>
+        </div>
+    </div>
+    <div id="content-container">
+        <div id="day-container">
+            <div id="user-container">
+              <!-- Title Section -->
+              <div id="title-section">
+                <h3>USERNAME</h3>
+                <h5>2025-06-20 | Week XX</h5>
+              </div>
+              <!-- Tasks Section -->
+              <div id="tasks-section">
+              </div>
+            </div>
+        </div>
+        <div id="description-container">
+            <textarea id="description-textarea"></textarea>
+        </div>
+    </div>
+    <script src="static/js/DataManager.js"></script>
+    <script src="static/js/ViewManager.js"></script>
+</body>
+</html>
