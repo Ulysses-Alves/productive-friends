@@ -1,4 +1,4 @@
-import {firebaseConfig} from "./firebaseConfig";
+import {firebaseConfig} from "./firebaseConfig.js";
 
 const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const wkDayIsoValue = [7, 1, 2, 3, 4, 5, 6];
@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loadDates(currentWeekNum);
   loadTasks(userWeekData.taskList);
 });
-
-
 
 firebase.initializeApp(firebaseConfig);
 
