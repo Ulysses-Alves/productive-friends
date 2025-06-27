@@ -5,7 +5,7 @@ const contentContainer = document.getElementById("content-container");
 const tasksSection = document.getElementById("tasks-section");
 const descriptionTextArea = document.getElementById("description-textarea");
 
-
+let currentSelectedTask;
 
 function loadUsers(user){
     loggedUser.textContent = user;
@@ -15,11 +15,18 @@ function loadDates(weekNum){
     selectedWeek.textContent = "Week " + weekNum;
 }
 
-//display data
-// display description of first task
-// make in visible which task is selected
+function selectTask(task){
+    currentSelectedTask.dataset.selected = false;
+    task.dataset.selected = true;
+    currentSelectedTask = task;
+}
+
+function loadDesc(taskDesc){
+    descriptionTextArea.value = taskDesc;
+}
 
 function loadTasks(userTasks){
+
     const taskList = document.createElement("div");
     taskList.classList.add("task-list");
 
@@ -27,9 +34,18 @@ function loadTasks(userTasks){
         const taskElement = document.createElement("button");
 
         if(i == 0){
-            taskElement.classList.add("selected");
+            taskElement.dataset.selected = true;
+            currentSelectedTask = taskElement;
             descriptionTextArea.value = task.description;
         }
+        else{
+            taskElement.dataset.selected = false;
+        }
+
+        taskElement.addEventListener("click", () => {
+            selectTask(taskElement);
+            loadDesc(task.description);
+        });
 
         const edit = document.createElement("img");
         edit.style.cursor = "pointer";
@@ -48,7 +64,8 @@ function loadTasks(userTasks){
         taskBtns.append(edit, desc, checkBox)
 
         taskElement.textContent = task.title;
-        taskElement.classList.add("test-border", "task", "p-1");
+        taskElement.classList.add("task", "p-1");
+        taskElement.style.cursor = "pointer";
         taskElement.append(taskBtns);
         taskList.append(taskElement);
     });

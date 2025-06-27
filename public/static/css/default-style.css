@@ -101,13 +101,17 @@ textarea{
     flex-direction: row;
 }
 
-.selected{
+[data-selected = "true"]{
     background-color: black;
     color: white;
 }
 
-.selected img{
+[data-selected = "true"] img{
     filter: invert(1);
+}
+
+[data-selected = "false"] {
+    border: 2px black solid;
 }
 
 .test-border{
