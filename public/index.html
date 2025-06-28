@@ -3,50 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="static/css/default-style.css">
-    
+    <title>Login</title>
 </head>
-<body class="">
-    <div id="head">
-        <h1 id="logged-user" class="">getUserName</h1>
-        <div class="">
-            <div id="week-selector">
-                <div>
-                    <h2 id="selected-week">Week X</h2>
-                    <button id="week-selector-btn" class="">Select Week</button>
-                </div>
-            </div>
-            <div id="day-selector">
-
-            </div>
+<body>
+    <body id="login-body">
+        <div">
+            <h2>Login</h2>
+            <form action="/home" method="post" id="login-container">
+                <button type="submit" name="userStyle" value="default-style" class="btn">User Default</button>
+                <button type="submit" name="userStyle" value="m-style" class="btn">User M</button>
+                <button type="submit" name="userStyle" value="u-style" class="btn">User U</button>
+            </form>
         </div>
-        <div class="">
-            <button class="btn p-1">logout</button>
-        </div>
-    </div>
-    <div id="content-container">
-        <div id="day-container">
-            <div id="user-container">
-              <!-- Title Section -->
-              <div id="title-section">
-                <h3>USERNAME</h3>
-                <h5>2025-06-20 | Week XX</h5>
-                <div id="task-menu" class="">
-                    <img src="static/img/bx-plus-circle.svg" alt="Add Task">
-                </div>
-              </div>
-              <!-- Tasks Section -->
-              <div id="tasks-section">
-              </div>
-            </div>
-        </div>
-        <div id="description-container">
-            <textarea id="description-textarea"></textarea>
-        </div>
-    </div>
-    <script type="module" src="static/js/DataManager.js"></script>
-    <script src="static/js/ViewManager.js"></script>
 </body>
 </html>
