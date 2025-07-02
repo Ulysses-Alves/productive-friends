@@ -87,7 +87,6 @@ textarea{
 
 #login-body{
     box-sizing: border-box;
-    border: 1vw black solid;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -118,6 +117,22 @@ textarea{
     border: 2px red solid;
 }
 
+.flex{
+    display: flex;
+}
+
+.col{
+    flex-direction: column;
+}
+
+.f-btn{
+    background-color: white;
+    color: black;
+    border: 2px gray solid;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
 .task-list{
     display: flex;
     flex-direction: column;    
@@ -132,4 +147,8 @@ textarea{
 
 .p-1{
     padding: 1rem;
+}
+
+.m-1{
+    margin: 0.5rem;
 }
