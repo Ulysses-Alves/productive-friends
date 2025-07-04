@@ -7,12 +7,11 @@ const descriptionTextArea = document.getElementById("description-textarea");
 
 var currentSelectedTask;
 
-function loadUsers(user){
-    loggedUser.textContent = user;
-}
-
-function loadDates(weekNum){
-    selectedWeek.textContent = "Week " + weekNum;
+function loadInitalText(email, week){
+    Promise.all([
+        typeText("logged-user", "user-cursor", email),
+        typeText("selected-week", "week-cursor", "Week " + week)
+    ])
 }
 
 function selectTask(task){
@@ -71,4 +70,18 @@ function loadTasks(userTasks){
     });
 
     tasksSection.append(taskList);
+}
+
+async function typeText(elementId, cursorId, text){
+    const target = document.getElementById(elementId);
+    const cursor = document.getElementById(cursorId);
+
+    target.textContent = "";
+
+    for(let i = 0; i < text.length; i++){
+        target.textContent += text[i];
+        await new Promise(resolve => setTimeout(resolve, 60));
+    }
+
+    cursor.style.display = "none";
 }

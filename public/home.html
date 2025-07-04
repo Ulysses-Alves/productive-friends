@@ -6,33 +6,23 @@
     <title>Home</title>
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="static/css/default-style.css">
+
+    <!-- <span id="week-cursor">_</span> -->
     
 </head>
 <body class="">
     <div id="head">
-        <h1 id="logged-user" class="">getUserName</h1>
-        <div class="">
-            <div id="week-selector">
-                <div>
-                    <h2 id="selected-week">Week X</h2>
-                    <button id="week-selector-btn" class="">Select Week</button>
-                </div>
-            </div>
-            <div id="day-selector">
-
-            </div>
-        </div>
+        <h1 id="logged-user" class=""><span id="user-cursor">_</span></h1>
         <div class="">
             <button id="logout-btn" class="btn p-1">logout</button>
         </div>
     </div>
-    <div id="content-container">
-        <div id="day-container">
-            <div id="user-container">
+    <div id="content-container" class="">
+        <div id="day-container" class="">
+            <div id="user-container" class="">
               <!-- Title Section -->
               <div id="title-section">
-                <h3>USERNAME</h3>
-                <h5>2025-06-20 | Week XX</h5>
+                <h3 id="selected-user"><span id="selected-user-cursor">_</span></h3>
                 <div id="task-menu" class="">
                     <img src="static/img/bx-plus-circle.svg" alt="Add Task">
                 </div>
@@ -42,8 +32,20 @@
               </div>
             </div>
         </div>
-        <div id="description-container">
+        <div id="description-container" class="">
             <textarea id="description-textarea"></textarea>
+        </div>
+        <div id="friends-container" class="">
+            <div id="date-container">
+                <div id="week-selector" class="flex row space-around align-center">  
+                    <form>
+                        <select name="week-num" id="week-num">
+                            <option value="week-1">WEEK 1</option>
+                        </select>
+                    </form>
+                    <p>09 / jun</p>
+                </div>
+            </div>
         </div>
     </div>
     <script type="module" src="static/js/DataManager.js"></script>

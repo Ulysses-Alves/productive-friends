@@ -25,6 +25,7 @@ onAuthStateChanged(auth, (u) => {
   if(u){
     user = auth.currentUser;
     getTasks("2025-06-28");
+    loadInitalText(user.email, currentWeekNum);
     console.log("logged in");
   }
   else{
@@ -78,9 +79,3 @@ function logOut(){
     console.error("Logout error:", error.message);
   });
 }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   // loadUsers(user);
-//   // loadDates(currentWeekNum);
-//   // getTasks("2025-06-24");
-// });
