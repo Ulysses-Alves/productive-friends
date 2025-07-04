@@ -5,7 +5,7 @@ const contentContainer = document.getElementById("content-container");
 const tasksSection = document.getElementById("tasks-section");
 const descriptionTextArea = document.getElementById("description-textarea");
 
-let currentSelectedTask;
+var currentSelectedTask;
 
 function loadUsers(user){
     loggedUser.textContent = user;
