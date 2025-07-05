@@ -5,45 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="static/css/default-style.css">
-
-    <!-- <span id="week-cursor">_</span> -->
-    
+    <link rel="stylesheet" href="static/css/default-style.css">    
 </head>
-<body class="">
-    <div id="head">
-        <h1 id="logged-user" class=""><span id="user-cursor">_</span></h1>
+<body>
+    <div id="header">
+        <h1 id="username-display"><span id="user-cursor">_</span></h1>
         <div class="">
-            <button id="logout-btn" class="btn p-1">logout</button>
+            <button id="logout-btn">logout</button>
         </div>
     </div>
     <div id="content-container" class="">
-        <div id="day-container" class="">
-            <div id="user-container" class="">
-              <!-- Title Section -->
-              <div id="title-section">
-                <h3 id="selected-user"><span id="selected-user-cursor">_</span></h3>
-                <div id="task-menu" class="">
-                    <img src="static/img/bx-plus-circle.svg" alt="Add Task">
-                </div>
-              </div>
-              <!-- Tasks Section -->
+        <div id="tasks-container" class="">
+            <div class="box">
               <div id="tasks-section">
               </div>
             </div>
         </div>
         <div id="description-container" class="">
-            <textarea id="description-textarea"></textarea>
+            <textarea name="description-textarea" id="description-textarea" placeholder="Select task."></textarea>
         </div>
         <div id="friends-container" class="">
-            <div id="date-container">
+            <div class="box">
                 <div id="week-selector" class="flex row space-around align-center">  
                     <form>
-                        <select name="week-num" id="week-num">
-                            <option value="week-1">WEEK 1</option>
+                        <select name="week-num-selector" id="week-num-selector">
+                        </select>
+                        <select name="day-selector" id="day-selector">
                         </select>
                     </form>
-                    <p>09 / jun</p>
+                    <p>09/jun/2025</p>
                 </div>
             </div>
         </div>

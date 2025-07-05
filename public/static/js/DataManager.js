@@ -3,29 +3,42 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebas
 import { getFirestore, collection, getDocs, where, query } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const wkDayIsoValue = [7, 1, 2, 3, 4, 5, 6];
-
-//info doesn't presist between pages, use sessionStorage for login to home.
-
-var user;
-const currentDate = new Date();
-const currentDayNum = currentDate.getDate();
-const currentWeekNum = getISOWeekNumber(currentDate);
-// const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+//Firebase variables
 
 const tasks = [];
-
+var user;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 const db = getFirestore(app);
+
+//Date logic related variables
+
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth();
+const currentWkDay = currentDate.getDate();
+// const totalNumOfWK = ;
+const currentWkNum = getISOWeekNumber(currentDate);
+const daysOfWk = getDatesFromWeekNum(currentWkNum, 2025);
+
+//Listeners 
+
+document.getElementById("logout-btn").addEventListener("click", () => {
+  logOut();
+});
+
+//Firebase related functions
 
 onAuthStateChanged(auth, (u) => {
   if(u){
     user = auth.currentUser;
     getTasks("2025-06-28");
-    loadInitalText(user.email, currentWeekNum);
+
+    Promise.all([
+      typeText("username-display", "user-cursor", user.email),
+      loadSelectors(currentWkNum, 52, 6, daysOfWk)
+    ]);
+
     console.log("logged in");
   }
   else{
@@ -42,16 +55,29 @@ async function getTasks(date) {
   loadTasks(tasks);
 }
 
+function logOut(){
+  signOut(auth)
+  .then(() => {
+    console.log("User signed out");
+    window.location.href = "index.html";
+  })
+  .catch((error) => {
+    console.error("Logout error:", error.message);
+  });
+}
+
+// Date related functions
+
 function getISOWeekNumber(date) {
     const tempDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     const dayNum = tempDate.getUTCDay() || 7;
     tempDate.setUTCDate(tempDate.getUTCDate() + 4 - dayNum);
     const yearStart = new Date(Date.UTC(tempDate.getUTCFullYear(), 0, 1));
-    const weekNo = Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
-    return weekNo;
+    const weekNum = Math.ceil((((tempDate - yearStart) / 86400000) + 1) / 7);
+    return weekNum;
 }
 
-  function getDateString(date) {
+function getDateString(date) {
 
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -65,17 +91,24 @@ function getISOWeekNumber(date) {
       return `${date.getFullYear()}` + "-" + `${month}` + "-" + `${day}`
 }
 
-document.getElementById("logout-btn").addEventListener("click", () => {
-  logOut();
-});
+//Look into how this works
+function getDatesFromWeekNum(weekNum, year){
+  const simple = new Date(year,0,1 + (weekNum - 1) * 7);
+  const dayOfWeek = simple.getDay();
+  const ISOweekStart = new Date(simple);
 
-function logOut(){
-  signOut(auth)
-  .then(() => {
-    console.log("User signed out");
-    window.location.href = "index.html";
-  })
-  .catch((error) => {
-    console.error("Logout error:", error.message);
-  });
+  const diffToMonday = (dayOfWeek <= 4 ? dayOfWeek -1 : dayOfWeek - 8);
+
+  ISOweekStart.setDate(simple.getDate() - diffToMonday);
+
+  const weekDates = [];
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(ISOweekStart);
+    date.setDate(ISOweekStart.getDate() + i);
+    weekDates.push(date);
+  }
+
+  return weekDates
 }
+
+//create function for getting the total weeks of a year

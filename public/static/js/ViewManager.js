@@ -1,18 +1,7 @@
-const loggedUser = document.getElementById("logged-user");
-const selectedWeek = document.getElementById("selected-week");
-
-const contentContainer = document.getElementById("content-container");
 const tasksSection = document.getElementById("tasks-section");
 const descriptionTextArea = document.getElementById("description-textarea");
 
 var currentSelectedTask;
-
-function loadInitalText(email, week){
-    Promise.all([
-        typeText("logged-user", "user-cursor", email),
-        typeText("selected-week", "week-cursor", "Week " + week)
-    ])
-}
 
 function selectTask(task){
     currentSelectedTask.dataset.selected = false;
@@ -49,10 +38,6 @@ function loadTasks(userTasks){
         const edit = document.createElement("img");
         edit.style.cursor = "pointer";
         edit.src = 'static/img/bx-edit.svg';
-        
-        const desc = document.createElement("img");
-        desc.style.cursor = "pointer";
-        desc.src = 'static/img/bx-detail.svg';
 
         const checkBox = document.createElement("img");
         checkBox.style.cursor = "pointer";
@@ -60,7 +45,7 @@ function loadTasks(userTasks){
 
         const taskBtns = document.createElement("div");
         taskBtns.id = "task-btns";
-        taskBtns.append(edit, desc, checkBox)
+        taskBtns.append(edit, checkBox)
 
         taskElement.textContent = task.title;
         taskElement.classList.add("task", "p-1");
@@ -84,4 +69,26 @@ async function typeText(elementId, cursorId, text){
     }
 
     cursor.style.display = "none";
+}
+
+function loadSelectors(currentWeekNum, totalWeekNum, currentDay, weekDays){
+    const weekSelector = document.getElementById("week-num-selector");
+    const daySelector = document.getElementById("day-selector");
+
+    for(let i = 1; i <= totalWeekNum; i++){
+        const option = document.createElement("option");
+        option.value = `Week-${i}`;
+        option.textContent = `Week-${i}`;
+        weekSelector.appendChild(option);
+    }
+
+    weekDays.forEach((date) => {
+        const option = document.createElement("option");
+        option.value = date.toLocaleDateString("pt-BR", {weekday: "short"});
+        option.textContent = date.toLocaleDateString("pt-BR", {weekday: "short"});
+        daySelector.appendChild(option);
+    });
+
+    // daySelector.value = ;
+    weekSelector.value = `Week-${currentWeekNum}`;
 }
